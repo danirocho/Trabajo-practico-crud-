@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+
+
+
+{% block content %}
+    
+    {% if  oficina %}
+        <ul>
+            {% for oficina in oficina %}
+            <li>{{ oficina.nombre }} - {{ oficina.nombre_corto }} </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+        
+{% endblock content %}
+    

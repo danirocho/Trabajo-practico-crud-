@@ -9,9 +9,9 @@
         <ul>
             {% for persona in personas %}
             <li>{{ persona.nombre }} - {{ persona.apellido }} - {{ persona.edad }}-{{ persona.oficina}}
-                 - <a href="{% url 'persona:detalle' persona.pk %}">Ver</a>
-                    | <a href="{% url 'persona:editar' persona.pk %}">Editar</a>
-                    | <a href="{% url 'persona:borrar' persona.pk %}">Eliminar</a>
+                 - <a href="{% url 'persona:detalle' persona.pk %}" class="btn btn-sm btn-primary">Ver</a>
+                    | <a href="{% url 'persona:editar' persona.pk %}"class="btn btn-sm btn-warning text-white">Editar</a>
+                    | <a href="{% url 'persona:borrar' persona.pk %}"class="btn btn-sm btn-danger">Eliminar</a>
             </li>
             {% endfor %}
         </ul>

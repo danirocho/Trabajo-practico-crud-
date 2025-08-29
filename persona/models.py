@@ -9,9 +9,10 @@ class Persona(models.Model):
     edad = models.IntegerField(verbose_name='Edad')
     oficina = models.ForeignKey(
         Oficina,
-        verbose_name='Oficina',
-         on_delete=models.SET_NULL
-         , null=True, blank=True)
+        verbose_name='Oficina asignada',
+         on_delete=models.PROTECT,
+          related_name='personas',
+           null=True, blank=True)
     class Meta:
         """Meta definition for MODELNAME."""
 

@@ -14,9 +14,9 @@
     {% for oficina in oficinas %}
         <li>
             {{ oficina.nombre }} ({{ oficina.nombre_corto }})
-            - <a href="{% url 'oficina:detalle_oficina' oficina.pk %}">Ver</a>
-            | <a href="{% url 'oficina:editar_oficina' oficina.pk %}">Editar</a>
-            | <a href="{% url 'oficina:eliminar_oficina' oficina.pk %}">Eliminar</a>
+            - <a href="{% url 'oficina:detalle_oficina' oficina.pk %}"class="btn btn-sm btn-primary">Ver</a>
+            | <a href="{% url 'oficina:editar_oficina' oficina.pk %}"class="btn btn-sm btn-warning text-white">Editar</a>
+            | <a href="{% url 'oficina:eliminar_oficina' oficina.pk %}"class="btn btn-sm btn-danger">Eliminar</a>
         </li>
     {% empty %}
         <li>No hay oficinas registradas.</li>

@@ -23,3 +23,4 @@ class LogoutMessageView(TemplateView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Desloguearse'
         return context
+    

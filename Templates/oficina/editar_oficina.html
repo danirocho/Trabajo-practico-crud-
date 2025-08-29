@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Editar Oficina</h1>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Guardar cambios</button>
+</form>
+
+<a href="{% url 'oficina:detalle_oficina' oficina.pk %}">Cancelar</a>
+{% endblock %}

@@ -8,9 +8,16 @@
     {% if  personas %}
         <ul>
             {% for persona in personas %}
-            <li>{{ persona.nombre }} - {{ persona.apellido }} - {{ persona.edad }}-{{ persona.oficina}}</li>
+            <li>{{ persona.nombre }} - {{ persona.apellido }} - {{ persona.edad }}-{{ persona.oficina}}
+                 - <a href="{% url 'persona:detalle' persona.pk %}">Ver</a>
+                    | <a href="{% url 'persona:editar' persona.pk %}">Editar</a>
+                    | <a href="{% url 'persona:borrar' persona.pk %}">Eliminar</a>
+            </li>
             {% endfor %}
         </ul>
+        {% include 'paginator.html' %}
+    {% else %}
+        <p>No hay personas registradas</p>
     {% endif %}
         
 {% endblock content %}

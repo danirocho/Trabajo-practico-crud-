@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Buscar Oficinas</h1>
+
+<form method="get">
+    <input type="text" name="q" placeholder="Buscar..." value="{{ query }}">
+    <button type="submit">Buscar</button>
+</form>
+
+{% if oficinas %}
+<table>
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Nombre corto</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for oficina in oficinas %}
+        <tr>
+            <td>{{ oficina.nombre }}</td>
+            <td>{{ oficina.nombre_corto }}</td>
+            <td>
+                <a href="{% url 'oficina:detalle_oficina' oficina.pk %}">Ver</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<div>
+    {% if is_paginated %}
+        {% if page_obj.has_previous %}
+            <a href="?q={{ query }}&page=1">&laquo; Primero</a>
+            <a href="?q={{ query }}&page={{ page_obj.previous_page_number }}">Anterior</a>
+        {% endif %}
+        <span>Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</span>
+        {% if page_obj.has_next %}
+            <a href="?q={{ query }}&page={{ page_obj.next_page_number }}">Siguiente</a>
+            <a href="?q={{ query }}&page={{ page_obj.paginator.num_pages }}">Último &raquo;</a>
+        {% endif %}
+    {% endif %}
+</div>
+
+{% else %}
+<p>No se encontraron oficinas para "{{ query }}".</p>
+{% endif %}
+
+<a href="{% url 'oficina:lista_oficina' %}">Volver a la lista</a>
+{% endblock %}

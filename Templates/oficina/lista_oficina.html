@@ -1,17 +1,29 @@
-{% extends 'base.html' %}
-
-
-
+{% extends "base.html" %}
 
 {% block content %}
-    
-    {% if  oficina %}
-        <ul>
-            {% for oficina in oficina %}
-            <li>{{ oficina.nombre }} - {{ oficina.nombre_corto }} </li>
-            {% endfor %}
-        </ul>
-    {% endif %}
-        
-{% endblock content %}
-    
+<h1>Lista de Oficinas</h1>
+
+<!-- Formulario de búsqueda -->
+<form method="get" action="{% url 'oficina:lista_oficina' %}">
+    <input type="text" name="q" placeholder="Buscar oficina..." value="{{ request.GET.q }}">
+    <button type="submit">Buscar</button>
+</form>
+
+<!-- Lista de oficinas -->
+<ul>
+    {% for oficina in oficinas %}
+        <li>
+            {{ oficina.nombre }} ({{ oficina.nombre_corto }})
+            - <a href="{% url 'oficina:detalle_oficina' oficina.pk %}">Ver</a>
+            | <a href="{% url 'oficina:editar_oficina' oficina.pk %}">Editar</a>
+            | <a href="{% url 'oficina:eliminar_oficina' oficina.pk %}">Eliminar</a>
+        </li>
+    {% empty %}
+        <li>No hay oficinas registradas.</li>
+    {% endfor %}
+</ul>
+
+<!-- Link para crear nueva oficina -->
+<a href="{% url 'oficina:crear_oficina' %}">Crear nueva oficina</a>
+
+{% endblock %}

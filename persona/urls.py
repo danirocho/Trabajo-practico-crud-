@@ -1,5 +1,7 @@
 from django.urls import path
 from .views import *
+from .views import PersonaSearchView
+
 
 app_name = 'persona'
 
@@ -29,4 +31,6 @@ urlpatterns = [
         PersonaDeleteView.as_view(),
         name='borrar'
     ),
+    path("buscar/", PersonaSearchView.as_view(), name="buscar"
+    ),  
 ]

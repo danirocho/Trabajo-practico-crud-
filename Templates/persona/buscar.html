@@ -1,0 +1,21 @@
+{%extends 'base.html'%}
+{%block content%}
+    <h1>Buscar Persona</h1>
+    <form method="get">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="text" name="q" placeholder="Buscar por nombre" value="{{ request.GET.q }}">
+        <button type="submit">Buscar</button>
+        <a href="{% url 'persona:lista' %}">cancelar</a>
+    </form>
+    {% if personas %}
+        <h2>Resultados de la búsqueda:</h2>
+        <ul>
+            {% for persona in personas %}
+                <li>{{ persona.nombre }} {{ persona.apellido }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No se encontraron personas.</p>
+    {% endif %}
+{%endblock content%}

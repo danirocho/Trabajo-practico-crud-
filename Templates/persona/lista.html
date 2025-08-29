@@ -8,7 +8,7 @@
     {% if  personas %}
         <ul>
             {% for persona in personas %}
-            <li>{{ persona.nombre }} - {{ persona.apellido }} - {{ persona.edad }}</li>
+            <li>{{ persona.nombre }} - {{ persona.apellido }} - {{ persona.edad }}-{{ persona.oficina}}</li>
             {% endfor %}
         </ul>
     {% endif %}

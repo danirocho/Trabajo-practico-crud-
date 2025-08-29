@@ -5,7 +5,7 @@
         <h2>Resultados de la búsqueda:</h2>
         <ul>
             {% for persona in personas %}
-                <li>{{ persona.nombre }} {{ persona.apellido }}</li>
+                <li>{{ persona.nombre }} {{ persona.apellido }} {{persona.edad}} {{persona.oficina}}</li>
             {% endfor %}
         </ul>
     {% else %}

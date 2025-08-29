@@ -25,7 +25,7 @@ class PersonaCreateView(LoginRequiredMixin, CreateView):
 
 class PersonaUpdateView(LoginRequiredMixin, UpdateView):
     model = Persona
-    template_name = "persona/crear.html"
+    template_name = "persona/editar.html"
     fields = ['nombre','apellido', 'edad', 'oficina']
     success_url = reverse_lazy('persona:lista')
 

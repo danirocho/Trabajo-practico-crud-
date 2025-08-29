@@ -10,6 +10,14 @@ class OficinaListView(ListView):
     context_object_name = 'oficinas'
     paginate_by = 10
 
+    def get_queryset(self):
+        query = self.request.GET.get('q', '')
+        if query:
+            return Oficina.objects.filter(
+                Q(nombre__icontains=query) | Q(nombre_corto__icontains=query)
+            )
+        return Oficina.objects.all()
+    
 class OficinaDetailView(DetailView):
     model = Oficina
     template_name = 'oficina/detalle_oficina.html'

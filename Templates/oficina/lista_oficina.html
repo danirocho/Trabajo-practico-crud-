@@ -6,24 +6,38 @@
 <!-- Formulario de búsqueda -->
 <form method="get" action="{% url 'oficina:lista_oficina' %}">
     <input type="text" name="q" placeholder="Buscar oficina..." value="{{ request.GET.q }}">
-    <button type="submit">Buscar</button>
+    <button type="submit" class="btn btn-success btn-sm">Buscar</button>
 </form>
 
-<!-- Lista de oficinas -->
-<ul>
-    {% for oficina in oficinas %}
-        <li>
-            {{ oficina.nombre }} ({{ oficina.nombre_corto }})
-            - <a href="{% url 'oficina:detalle_oficina' oficina.pk %}"class="btn btn-sm btn-primary">Ver</a>
-            | <a href="{% url 'oficina:editar_oficina' oficina.pk %}"class="btn btn-sm btn-warning text-white">Editar</a>
-            | <a href="{% url 'oficina:eliminar_oficina' oficina.pk %}"class="btn btn-sm btn-danger">Eliminar</a>
-        </li>
-    {% empty %}
-        <li>No hay oficinas registradas.</li>
-    {% endfor %}
-</ul>
+<!-- Tabla de oficinas -->
+<table class="table table-striped table-hover mt-3">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Nombre Corto</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for oficina in oficinas %}
+        <tr>
+            <td>{{ oficina.nombre }}</td>
+            <td>{{ oficina.nombre_corto }}</td>
+            <td>
+                <a href="{% url 'oficina:detalle_oficina' oficina.pk %}" class="btn btn-sm btn-primary">Ver</a>
+                <a href="{% url 'oficina:editar_oficina' oficina.pk %}" class="btn btn-sm btn-warning text-white">Editar</a>
+                <a href="{% url 'oficina:eliminar_oficina' oficina.pk %}" class="btn btn-sm btn-danger">Eliminar</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="3">No hay oficinas registradas.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 
 <!-- Link para crear nueva oficina -->
-<a href="{% url 'oficina:crear_oficina' %}">Crear nueva oficina</a>
+<a href="{% url 'oficina:crear_oficina' %}" class="btn btn-success">Crear nueva oficina</a>
 
-{% endblock %}
+{% endblock content %}

@@ -6,19 +6,38 @@
 {% block content %}
     
     {% if  personas %}
-        <ul>
-            {% for persona in personas %}
-            <li>{{ persona.nombre }} - {{ persona.apellido }} - {{ persona.edad }}-{{ persona.oficina}}
-                 - <a href="{% url 'persona:detalle' persona.pk %}" class="btn btn-sm btn-primary">Ver</a>
-                    | <a href="{% url 'persona:editar' persona.pk %}"class="btn btn-sm btn-warning text-white">Editar</a>
-                    | <a href="{% url 'persona:borrar' persona.pk %}"class="btn btn-sm btn-danger">Eliminar</a>
-            </li>
-            {% endfor %}
-        </ul>
+       <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Edad</th>
+                    <th>Oficina</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for persona in personas %}
+                <tr>
+                    <td>{{ persona.nombre }}</td>
+                    <td>{{ persona.apellido }}</td>
+                    <td>{{ persona.edad }}</td>
+                    <td>{{ persona.oficina }}</td>
+                    <td>
+                        <a href="{% url 'persona:detalle' persona.pk %}" class="btn btn-sm btn-primary">Ver</a>
+                        <a href="{% url 'persona:editar' persona.pk %}" class="btn btn-sm btn-warning text-white">Editar</a>
+                        <a href="{% url 'persona:borrar' persona.pk %}" class="btn btn-sm btn-danger">Eliminar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
         {% include 'paginator.html' %}
     {% else %}
         <p>No hay personas registradas</p>
     {% endif %}
+
+<a href="{% url 'persona:crear' %}" class="btn btn-success mb-3">Agregar persona</a>
         
 {% endblock content %}
     

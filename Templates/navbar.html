@@ -1,43 +1,46 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">BD</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
       <span class="navbar-toggler-icon"></span>
     </button>
+
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link " aria-current="page" href="{% url 'persona:lista' %}">Lista de personas</a>
+          <a class="nav-link" href="{% url 'persona:lista' %}">Lista de personas</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="{% url 'oficina:lista_oficina' %}">Lista de oficinas</a>
+          <a class="nav-link" href="{% url 'oficina:lista_oficina' %}">Lista de oficinas</a>
         </li>
-        <li class="nav-item dropdown">
-  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    ESTADO
-  </a>
-  <ul class="dropdown-menu">
+
+            <!-- Dropdown de estado / usuario -->
             {% if user.is_authenticated %}
-          <li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                Hola, {{ user.username }}
+              </a>
+              <div class="dropdown-menu" aria-labelledby="userDropdown">
                 <form method="post" action="{% url 'account_logout' %}" class="px-3 py-1">
                   {% csrf_token %}
                   <button type="submit" class="btn btn-danger w-100">Cerrar sesión</button>
                 </form>
-              </li>
-            {% else %}
-              <li><a class="dropdown-item" href="{% url 'account_login' %}">Iniciar sesión</a></li>
-              <li><a class="dropdown-item" href="{% url 'account_signup' %}">Registrarse</a></li>
-            {% endif %}
-          </ul>
-        </li>
+              </div>
+            </li>
+          {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'account_login' %}">Iniciar sesión</a>
+            </li>
+          {% endif %}
+            
 
-        <li class="nav-item">
-          <a class="nav-link disabled" aria-disabled="true"></a>
         </li>
       </ul>
-      <form class="d-flex" role="search" action="{% url 'persona:buscar' %}" method="get">
-        <input class="form-control me-2" type="search" placeholder="Search" 
-        aria-label="Search" name='q'/>
+
+      <!-- Buscador -->
+      <form class="d-flex" role="search" method="get" action="{% url 'persona:buscar' %}">
+        <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search" name="q">
         <button class="btn btn-outline-success" type="submit">Buscar</button>
       </form>
     </div>

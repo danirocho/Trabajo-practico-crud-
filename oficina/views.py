@@ -8,7 +8,7 @@ class OficinaListView(ListView):
     model = Oficina
     template_name = 'oficina/lista_oficina.html'
     context_object_name = 'oficinas'
-    paginate_by = 10
+    paginate_by = 5
 
     def get_queryset(self):
         query = self.request.GET.get('q', '')
@@ -44,15 +44,17 @@ class OficinaSearchView(ListView):
     model = Oficina
     template_name = 'oficina/buscar_oficina.html'
     context_object_name = 'oficinas'
-    paginate_by = 10
+    paginate_by = 10  # cantidad de resultados por página
 
     def get_queryset(self):
-        query = self.request.GET.get('q')
+        query = self.request.GET.get('q', '').strip()
         if query:
+            # filtramos oficinas que contengan la palabra en nombre o nombre_corto
             return Oficina.objects.filter(
                 Q(nombre__icontains=query) | Q(nombre_corto__icontains=query)
             )
-        return Oficina.objects.none()
+        # Si no hay query, devolvemos todos los registros para poder paginar
+        return Oficina.objects.all()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

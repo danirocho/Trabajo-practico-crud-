@@ -40,6 +40,13 @@ INSTALLED_APPS = [
     'persona',
     'accounts',
     'oficina',
+    'bootstrap4',
+    'crispy_forms',
+    'crispy_bootstrap4',
+    'captcha',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
 ]
 
 MIDDLEWARE = [
@@ -50,6 +57,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'crud.urls'
@@ -57,7 +65,7 @@ ROOT_URLCONF = 'crud.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates'],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -130,3 +138,10 @@ LOGIN_REDIRECT_URL = 'persona:lista'
 
 #Redireccion despues del logout
 LOGOUT_REDIRECT_URL = 'persona:lista'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+SITE_ID = 1
+
+ACCOUNT_FORMS = {'signup': 'accounts.forms.CustomSignupForm',}
+
+ACCOUNT_EMAIL_VERIFICATION = 'none'

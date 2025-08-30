@@ -13,18 +13,24 @@
           <a class="nav-link " href="{% url 'oficina:lista_oficina' %}">Lista de oficinas</a>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            ESTADO
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="{% url 'accounts:login' %}">iniciar sesión</a></li>
-            <li> <form method="post" action="{% url 'accounts:logout' %}" class="px-3 py-1">
+  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    ESTADO
+  </a>
+  <ul class="dropdown-menu">
+            {% if user.is_authenticated %}
+          <li>
+                <form method="post" action="{% url 'account_logout' %}" class="px-3 py-1">
                   {% csrf_token %}
-                <button type="submit" class="btn btn-danger w-100">Cerrar sesión</button></form>
-            </li>
-            <li><a class="dropdown-item" href="#"></a></li>
+                  <button type="submit" class="btn btn-danger w-100">Cerrar sesión</button>
+                </form>
+              </li>
+            {% else %}
+              <li><a class="dropdown-item" href="{% url 'account_login' %}">Iniciar sesión</a></li>
+              <li><a class="dropdown-item" href="{% url 'account_signup' %}">Registrarse</a></li>
+            {% endif %}
           </ul>
         </li>
+
         <li class="nav-item">
           <a class="nav-link disabled" aria-disabled="true"></a>
         </li>
